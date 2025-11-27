@@ -30,7 +30,7 @@ It provides on-device AI capabilities for safer browsing, scam detection, and mu
 ## 2. Open in VS Code and run:
 	  ◦ npm install to install the dependencies.
 	  ◦ Adjust environment variables if needed.
-      ◦ NPM Run Dev for Windows and NPM run for MacOS
+      ◦ npm run build for Windows and NPM run for MacOS
 
 ## 3. In Chrome:
 	  ◦ Go to Extensions → Manage Extensions → Load unpacked.
