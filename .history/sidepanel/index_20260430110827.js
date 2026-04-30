@@ -1,3 +1,5 @@
+
+
 import DOMPurify from 'dompurify';
 import { marked } from 'marked';
 /* global LanguageModel */
@@ -36,54 +38,29 @@ fetch(chrome.runtime.getURL("data/phishing_patterns.json"))
   })
   .catch(err => console.error("Failed to load phishing dataset:", err));
 
-// Chrome 149+ WebMCP update: registerTool with untrustedContentHint: true
-// Required for any tool that processes data from external or unverified sources.
-if ('modelContext' in navigator) {
-  navigator.modelContext.registerTool({
-    name: "analyzePhishing",
-    description: "Analyzes user-submitted text for phishing, scam, or misinformation signals using on-device AI.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        text: { type: "string" }
-      }
-    },
-    execute: ({ text }) => {
-      // Actual analysis is handled by the LanguageModel session below.
-      // This registration flags the tool as processing untrusted external input.
-      return `Analyzing for phishing: ${text}`;
-    },
-    annotations: {
-      readOnlyHint: true,
-      // untrustedContentHint must be true because we process user-submitted
-      // and externally sourced content (URLs, messages, phishing_patterns.json).
-      untrustedContentHint: true
-    }
-  });
-}
-
 async function runPrompt(prompt, params) {
   try {
     if (!session) {
-      const availability = await LanguageModel.availability(params);
-      if (availability === "unavailable") {
-        showError("Prompt API is not available in this context.");
-        return;
-      }
+  const availability = await LanguageModel.availability(params);
+  if (availability === "unavailable") {
+    showError("Prompt API is not available in this context.");
+    return;
+  }
 
-      session = await LanguageModel.create({
-        ...params,
-        monitor(m) {
-          m.addEventListener("downloadprogress", e => {
-            console.log(`Download progress: ${e.loaded * 100}%`);
-          });
-        }
-      });
-
-      session.addEventListener("quotaoverflow", () => {
-        console.warn("Context quota exceeded. Some messages were dropped.");
+  session = await LanguageModel.create({
+    ...params,
+    monitor(m) {
+      m.addEventListener("downloadprogress", e => {
+        console.log(`Download progress: ${e.loaded * 100}%`);
+        // Optional: show progress bar here
       });
     }
+  });
+
+  session.addEventListener("quotaoverflow", () => {
+    console.warn("Context quota exceeded. Some messages were dropped.");
+  });
+}
     return session.prompt(prompt);
   } catch (e) {
     console.log('Prompt failed');
@@ -120,6 +97,7 @@ async function initDefaults() {
 }
 
 initDefaults();
+  
 
 buttonReset.addEventListener('click', () => {
   hide(elementLoading);
@@ -170,7 +148,7 @@ ${phishingDataset.slice(0, 10).map(url => `- ${url}`).join('\n')}
       initialPrompts: [
         {
           role: 'system',
-          content: 'You are Morrigan, a protective AI assistant that analyzes text, links, audio and images for phishing, scams, and misinformation.'
+          content: 'You are Surf Shield, a protective AI assistant that analyzes text for phishing, scams, and misinformation.'
         }
       ],
       temperature: Number(sliderTemperature.value),
@@ -208,11 +186,12 @@ function showResponse(response) {
   show(elementResponse);
   elementResponse.innerHTML = DOMPurify.sanitize(marked.parse(response));
   let explanation = '';
+  let isSuspicious = response.toLowerCase().includes("phishing");
   if (response.toLowerCase().includes("phishing")) {
-    show(buttonReport);
-    buttonReport.removeAttribute('disabled');
-    buttonReport.textContent = "Report this";
-
+  show(buttonReport);
+  buttonReport.removeAttribute('disabled');
+  buttonReport.textContent = "Report this";
+  
     explanation = `
 **Why is this suspicious?**
 - The message is vague or lacks context.
@@ -226,7 +205,7 @@ function showResponse(response) {
 - It provides context and does not pressure you to act quickly.
 - Still, stay cautious and verify the sender if unsure.
     `;
-    hide(buttonReport);
+  hide(buttonReport);  
   }
 
   elementExplanation.innerHTML = DOMPurify.sanitize(marked.parse(explanation));
@@ -247,8 +226,8 @@ function show(element) {
 function hide(element) {
   element.setAttribute('hidden', '');
 }
-
 function logSuspiciousMessage(message) {
+  // Currently logs the reported suspicious message to the console.
   console.log("Reported suspicious message:", message);
   // Future: push to localStorage, backend, or export file
 }

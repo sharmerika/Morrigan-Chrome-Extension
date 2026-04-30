@@ -5,4 +5,3 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
       .catch((error) => console.error(error));
   }
 });
- 

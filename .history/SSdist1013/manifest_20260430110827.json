@@ -1,13 +1,13 @@
 {
-  "name": "Morrigan",
-  "version": "0.3",
+  "name": "Chrome Prompt AI Demo",
+  "version": "0.2",
   "manifest_version": 3,
-  "description": "Morrigan is a Chrome AI Built-in extension for safer browsing — powered by the Prompt API and Gemini Nano for on-device scam and phishing detection.",
+  "description": "Try Chrome's built-in prompt API built with Gemini Nano.",
   "background": {
     "service_worker": "background.js"
   },
   "permissions": ["sidePanel"],
-  "minimum_chrome_version": "149",
+  "minimum_chrome_version": "138",
   "side_panel": {
     "default_path": "sidepanel/index.html"
   },
@@ -18,7 +18,7 @@
       "48": "images/icon48.png",
       "128": "images/icon128.png"
     },
-    "default_title": "Open Morrigan"
+    "default_title": "Open Chat Interface"
   },
   "web_accessible_resources": [
     {
@@ -26,4 +26,5 @@
       "matches": ["<all_urls>"]
     }
   ]
+
 }

@@ -3872,22 +3872,6 @@
       console.log("Phishing dataset loaded:", phishingDataset);
     })
     .catch(err => console.error("Failed to load phishing dataset:", err));
-    // Chrome 149+: flag this tool as processing untrusted external content
-if ('modelContext' in navigator) {
-  navigator.modelContext.registerTool({
-    name: "analyzePhishing",
-    description: "Analyzes user-submitted text for phishing, scam, or misinformation signals.",
-    inputSchema: {
-      type: "object",
-      properties: { text: { type: "string" } }
-    },
-    execute: ({ text }) => `Analyzing for phishing: ${text}`,
-    annotations: {
-      readOnlyHint: true,
-      untrustedContentHint: true
-    }
-  });
-}
 
   async function runPrompt(prompt, params) {
     try {
