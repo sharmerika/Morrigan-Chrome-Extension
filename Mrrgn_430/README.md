@@ -50,7 +50,7 @@ Morrigan correctly identifies scam messages written in Hiligaynon, including a f
 
 ## 3. In Chrome:
 	  ◦ Go to Extensions → Manage Extensions → Load unpacked.
-	  ◦ Select the SSdist1013 folder.
+	  ◦ Select the Mrrgn_430 folder.
 ## 4. The Morrigan side panel will appear in Chrome.
 
 ## Tech Stack
