@@ -3977,7 +3977,7 @@ ${phishingDataset.slice(0, 10).map(url => `- ${url}`).join('\n')}
         initialPrompts: [
           {
             role: 'system',
-            content: 'You are Morrigan, a protective AI assistant that analyzes text for phishing, scams, and misinformation.'
+            content: 'You are Surf Shield, a protective AI assistant that analyzes text for phishing, scams, and misinformation.'
           }
         ],
         temperature: Number(sliderTemperature.value),

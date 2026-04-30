@@ -1,8 +1,8 @@
 {
-  "name": "Morrigan",
+  "name": "Chrome Prompt AI Demo",
   "version": "0.2",
   "manifest_version": 3,
-  "description": "Morrigan is a Chrome extension designed to detect and prevent phishing attacks by analyzing web content and user interactions.",
+  "description": "Try Chrome's built-in prompt API built with Gemini Nano.",
   "background": {
     "service_worker": "background.js"
   },
@@ -18,7 +18,7 @@
       "48": "images/icon48.png",
       "128": "images/icon128.png"
     },
-    "default_title": "Open Morrigan"
+    "default_title": "Open Chat Interface"
   },
   "web_accessible_resources": [
     {
