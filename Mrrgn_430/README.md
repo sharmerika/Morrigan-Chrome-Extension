@@ -34,14 +34,14 @@ Morrigan correctly identifies scam messages written in Hiligaynon, including a f
 
 
 ## Walkthrough Video
-[Watch the walkthrough here](https://youtu.be/B_0_hc2AqXM?si=WGyJk7FP6Cnz7B6H)  
+[Watch the walkthrough here](https://youtu.be/B_0_hc2AqXM?si=WGyJk7FP6Cnz7B6H)  I will update this soon!
 
 ---
 
 ## Installation
 1. Clone this repository:
    ```bash
-     git clone https://github.com/your-username/surf-shield.git
+     git clone https://github.com/your-username/Morrigan-Chrome-Extension.git
 
 ## 2. Open in VS Code and run:
 	  ◦ npm install to install the dependencies.
@@ -51,7 +51,7 @@ Morrigan correctly identifies scam messages written in Hiligaynon, including a f
 ## 3. In Chrome:
 	  ◦ Go to Extensions → Manage Extensions → Load unpacked.
 	  ◦ Select the SSdist1013 folder.
-## 4. The Surf-shield side panel will appear in Chrome.
+## 4. The Morrigan side panel will appear in Chrome.
 
 ## Tech Stack
 • Chrome Prompt API (text + multimodal)
